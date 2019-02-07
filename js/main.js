@@ -322,7 +322,7 @@ function createMap(overlayMaps){
     var submitButton = $("#k_button");
     submitButton.click(function(){
         if(map.hasLayer(overlayMaps["GIS Analysis Layers"]["Regression"])){
-          alert('Please select IDW layer')
+          alert('Please select the IDW layer to use the interpolation feature.')
         } else if (map.hasLayer(overlayMaps["GIS Analysis Layers"]["IDW"])){
           if ($( ".leaflet-control-layers-selector" ).prop( "checked", true )){
           }
