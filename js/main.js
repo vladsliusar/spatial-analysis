@@ -17,8 +17,8 @@ var map = L.map('map', {
     maxBounds: bounds,
     zoomControl: false,
     maxNativeZoom: 10,
-    center: [44.7844, -89.7879],
-    zoom: 7,
+    center: [37.0902, -95.7129],
+    zoom: 4,
     layers: [darkscale],
     // remove attribution
     attributionControl: false
@@ -28,6 +28,8 @@ var map = L.map('map', {
 var layersControl;
 
 darkscale.addTo(map);
+// zoom to Wisconsin
+setTimeout(function(){map.flyTo([44.7844, -89.7879],7,{animate:true,duration:4})},3000)
 
 var zoomHome = L.Control.zoomHome({position:'topright'});
 zoomHome.addTo(map);
