@@ -4,6 +4,13 @@ body, html {height:100%;}
 div.wrap {height:100%; overflow:hidden;}
 body { margin:0; padding:0; overflow: hidden;}
 
+input.btn {
+  -webkit-user-select: initial;
+  -khtml-user-select: initial;
+  -moz-user-select: initial;
+  -ms-user-select: initial;
+  user-select: initial;
+}
 
 /*remove Chrome's blue highlight*/
 :focus {
