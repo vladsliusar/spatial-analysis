@@ -1,4 +1,4 @@
-document.addEventListener('mousedown', function(e){ e.preventDefault(); }, false);
+
 $(document).ready(function(){
     //sidebar about panel
     $(".sidebar_about").css('display', 'none');
