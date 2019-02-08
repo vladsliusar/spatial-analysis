@@ -298,8 +298,10 @@ function createMap(overlayMaps){
 
     $(".leaflet-control-layers-list").prepend("<p id='control_title'>ANALYSIS CONTROLS</p>");
     $(".leaflet-control-layers-list").append("<p id='control_k'>Enter k Value for IDW</p>");
-    $(".leaflet-control-layers-list").append('<input type="text" name="k_field" id="k_input" autocomplete="off" <a href="#" class="k_tooltip" title="k is the distance decay coefficient which determines how fast weight will decrease as distance increases. Although there is no universal proper value, the accepted good range varies between 1 and 3. Where smaller number is used for a long range spatial autocorelation, while a larger number is used for a short range autocorrelation."</a><button id="k_button" type="button" class="btn">Interpolate</button>');
-    $(".k_tooltip").tooltip({placement: 'bottom', animation:true});
+    $(".leaflet-control-layers-list").append('<input type="text" name="k_field" id="k_input" autocomplete="off" data-toggle="tooltip" data-placement="bottom" title="k is the distance decay coefficient which determines how fast weight will decrease as distance increases. Although there is no universal proper value, the accepted good range varies between 1 and 3. Where smaller number is used for a long range spatial autocorelation, while a larger number is used for a short range autocorrelation."/><button id="k_button" type="button" class="btn">Interpolate</button>');
+    $(function () {
+        $('[data-toggle="tooltip"]').tooltip()
+    })
 
     map.on('overlayadd', function (eventLayer) {
 
