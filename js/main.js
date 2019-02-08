@@ -294,6 +294,18 @@ function createMap(overlayMaps){
     }
 
     }
+    
+    //prevent map zooming while using the layers control
+    $(".leaflet-control-container").on('mousedown dblclick', function(e){
+        L.DomEvent.stopPropagation(e);
+     });
+     //prevent map panning while using the layers control
+     $(".leaflet-control-container").mousedown(function () {
+         map.dragging.disable();
+     });
+     $(document).mouseup(function () {
+         map.dragging.enable();
+     });
 
 
     $(".leaflet-control-layers-list").prepend("<p id='control_title'>ANALYSIS CONTROLS</p>");
