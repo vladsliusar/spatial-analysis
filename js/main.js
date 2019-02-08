@@ -32,6 +32,8 @@ darkscale.addTo(map);
 setTimeout(function(){map.flyTo([44.7844, -89.7879],7,{animate:true,duration:4})},3000)
 
 var zoomHome = L.Control.zoomHome({position:'topright'});
+zoomHome.setHomeCoordinates([44.7844, -89.7879]);
+zoomHome.setHomeZoom(7);
 zoomHome.addTo(map);
 
  // add attribution - bottom-left
