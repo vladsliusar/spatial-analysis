@@ -93,6 +93,12 @@ function startApp(weight,overlayMaps){
               return L.circleMarker(latlng, geojsonMarkerOptions);
           }
         })//.addTo(map)
+        // add popup on click
+        wellsL.bindPopup("Test Water Wells")
+        // remove popup on hover out
+        wellsL.on('mouseout', function (e) {
+              this.closePopup();
+        });
         return wellsL
 
     }
