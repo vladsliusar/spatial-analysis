@@ -293,6 +293,10 @@ border-radius: 10px;
 box-shadow: 0 1px 5px rgba(255,255,255,0.3);
 }
 
+.leaflet-control-layers.leaflet-control-layers-expanded.leaflet-control{
+  box-shadow: 0 1px 5px rgba(255,255,255,0.3);
+}
+
 span{
   padding-left: 8px;
 }
