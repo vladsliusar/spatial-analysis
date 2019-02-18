@@ -91,16 +91,22 @@ function startApp(weight,overlayMaps){
         wellsL = L.geoJSON(wells, {
           pointToLayer: function (feature, latlng) {
               return L.circleMarker(latlng, geojsonMarkerOptions);
+          },
+          onEachFeature: function (feature, layer) {
+            layer.bindPopup('Nitrate Value: '+ '<br>' +
+            feature.properties.nitr_ran.toLocaleString(),{
+                  className : 'popupCustom'
+             })
+             // activate popup on hover
+             layer.on('mouseover', function (e) {
+                  this.openPopup();
+                 });
+             layer.on('mouseout', function (e) {
+                  this.closePopup();
+                 });      
           }
         })//.addTo(map)
-        // add popup on click
-        wellsL.bindPopup("Test Water Wells")
-        // remove popup on hover out
-        wellsL.on('mouseout', function (e) {
-              this.closePopup();
-        });
         return wellsL
-
     }
 
 
