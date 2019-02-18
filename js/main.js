@@ -217,9 +217,10 @@ function startApp(weight,overlayMaps){
               steps: 7,
               mode: 'q',
               style: {
-                color: '#fff',
+                color: '#000',
                 weight: 1.6,
-                fillOpacity: 1
+                fillOpacity: 0.8,
+                opacity: 0.8
               },
               onEachFeature: function (feature, layer) {
                 layer.bindPopup('Nitrate Value: '+ '<br>' +
