@@ -110,14 +110,72 @@ function startApp(weight,overlayMaps){
     }
 
 
-    $.getJSON('data/OLS_tracts_mapshaper.json', function(residuals){
+    $.getJSON('data/cancer_tracts.geojson', function(residuals){
       var regressionLayer = regressionLayerFn(residuals)
       regressionLayer.name = "regression_layer"
       createLayersArray(regressionLayer)
     })
 
-    // lenear regression ArcGIS data
+    // lenear regression
     function regressionLayerFn(residuals){
+        
+        // create arrays of cancer rates, nitrate rates, and an array of arrays (both comined)
+        var canRate = [];
+        var nitRate = [];
+        var rateArray = [];
+        residuals.features.forEach(function(feature){
+          rateArray.push([feature.properties.nitrate,feature.properties.canrate])
+          canRate.push(feature.properties.canrate)
+          nitRate.push(feature.properties.nitrate)
+        })
+
+        // create an array of observed values
+        var observed = [];
+        rateArray.forEach(function(array){
+            observed.push(array[1]);
+        })
+
+        const result = regression('linear',rateArray);
+        //const gradient = result.equation[0];
+        //const yIntercept = result.equation[1];
+
+        // create an array of predicted values
+        var predicted = [];
+        result.points.forEach(function(array){
+          predicted.push(array[1]);
+        })
+
+        // create an array of residuals: difference between observed and predicted values
+        var residual = [];
+        for(var i = 0; i <= predicted.length - 1;i++){
+          residual.push(observed[i]-predicted[i])
+        }
+
+        // Below calculations find standardized residuals Residual(i)/SquareRoot of 1/n-1 * SUM of Residuals Square:
+
+        // create an array of residuals square
+        var residualSquare = [];
+        residual.forEach(function(res){
+          residualSquare.push(Math.pow(res,2))
+        })
+
+        // sum all residuales square
+        var residualSquareSum = residualSquare.reduce((a,b)=>a+b);
+
+        // 1/n-1 = 1/1401-1 = 0.00071429
+        var residualSquareSumMultiply = residualSquareSum * 0.00071429
+
+        // Squre Root of 1/n-1 * SUM of Residuals Square ---- residualSquareSumMultiply
+        var residualSquareSumMultiplySqrt = Math.sqrt(residualSquareSumMultiply)
+
+        // loop through two arrays and add property(StdResid):values to the residual object
+        for(var i=0;i<residual.length ;i++){
+          for(var j=0; j<residuals.features.length;j++){
+            if(i==j){
+              residuals.features[i].properties.StdResid = residual[j]/residualSquareSumMultiplySqrt
+            }
+          }
+        }
 
             function highlightFeature(e) {
               var layer = e.target;
