@@ -17,8 +17,8 @@ var map = L.map('map', {
     maxBounds: bounds,
     zoomControl: false,
     maxNativeZoom: 10,
-    center: [37.0902, -95.7129],
-    zoom: 4,
+    center: [44.7844, -89.7879],
+    zoom: 7,
     layers: [darkscale],
     // remove attribution
     attributionControl: false
@@ -29,7 +29,7 @@ var layersControl;
 
 darkscale.addTo(map);
 // zoom to Wisconsin
-setTimeout(function(){map.flyTo([44.7844, -89.7879],7,{animate:true,duration:4})},3000)
+//setTimeout(function(){map.flyTo([44.7844, -89.7879],7,{animate:true,duration:4})},3000)
 
 var zoomHome = L.Control.zoomHome({position:'topright'});
 zoomHome.setHomeCoordinates([44.7844, -89.7879]);
@@ -103,7 +103,7 @@ function startApp(weight,overlayMaps){
                  });
              layer.on('mouseout', function (e) {
                   this.closePopup();
-                 });      
+                 });
           }
         })//.addTo(map)
         return wellsL
@@ -118,7 +118,7 @@ function startApp(weight,overlayMaps){
 
     // lenear regression
     function regressionLayerFn(residuals){
-        
+
         // create arrays of cancer rates, nitrate rates, and an array of arrays (both comined)
         var canRate = [];
         var nitRate = [];
@@ -369,7 +369,7 @@ function createMap(overlayMaps){
     }
 
     }
-    
+
     //prevent map zooming while using the layers control
     $(".leaflet-control-container").on('mousedown dblclick', function(e){
         L.DomEvent.stopPropagation(e);
